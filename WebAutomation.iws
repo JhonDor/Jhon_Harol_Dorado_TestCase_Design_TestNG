@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7903e2d9-6651-4b36-bf3b-607e6e58af71" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/resources/DataProvider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebAutomation.iws" beforeDir="false" afterPath="$PROJECT_DIR$/WebAutomation.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/globant/BaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/globant/BaseTest.java" afterDir="false" />
