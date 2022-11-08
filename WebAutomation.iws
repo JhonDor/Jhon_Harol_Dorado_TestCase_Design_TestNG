@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7903e2d9-6651-4b36-bf3b-607e6e58af71" name="Changes" comment="" />
+    <list default="true" id="7903e2d9-6651-4b36-bf3b-607e6e58af71" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/WebAutomation.iws" beforeDir="false" afterPath="$PROJECT_DIR$/WebAutomation.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/globant/BaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/globant/BaseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/globant/EspnDeactivateUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/globant/EspnDeactivateUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/globant/EspnLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/globant/EspnLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/globant/EspnLogout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/globant/EspnLogout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/globant/Suite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/resources/Suite.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -251,13 +259,18 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/jhon.dorado/Documents/tareas/Jhon_Harol_Dorado_TestCase_Design_TestNG",
+    "last_opened_file_path": "C:/Users/jhon.dorado/Documents/tareas/Jhon_Harol_Dorado_TestCase_Design_TestNG/src/test/java/resources/Suite.xml",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "editor.preferences.import"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jhon.dorado\Documents\tareas\Jhon_Harol_Dorado_TestCase_Design_TestNG\src\test\java\resources" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration selected="false" default="true" type="Applet" factoryName="Applet">
       <module name="" />
@@ -286,10 +299,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="C:/Users/jhon.dorado/Documents/tareas/maven/WebAutomation/src/test/java/com/globant/Suite.xml" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="C:/Users/jhon.dorado/Documents/tareas/Jhon_Harol_Dorado_TestCase_Design_TestNG/src/test/java/resources/Suite.xml" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="WebAutomation" />
-      <option name="SUITE_NAME" value="$PROJECT_DIR$/src/test/java/com/globant/Suite.xml" />
+      <shortenClasspath name="NONE" />
+      <useClassPathOnly />
+      <option name="SUITE_NAME" value="$PROJECT_DIR$/src/test/java/resources/Suite.xml" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="GROUP_NAME" value="" />
       <option name="TEST_OBJECT" value="SUITE" />
+      <option name="PARAMETERS" value="" />
+      <option name="OUTPUT_DIRECTORY" value="" />
+      <option name="PROPERTIES_FILE" value="" />
       <properties />
       <listeners />
       <method v="2">
@@ -298,7 +320,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.C:/Users/jhon.dorado/Documents/tareas/maven/WebAutomation/src/test/java/com/globant/Suite.xml" />
+        <item itemvalue="TestNG.C:/Users/jhon.dorado/Documents/tareas/Jhon_Harol_Dorado_TestCase_Design_TestNG/src/test/java/resources/Suite.xml" />
       </list>
     </recent_temporary>
   </component>
