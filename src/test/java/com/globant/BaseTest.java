@@ -11,23 +11,29 @@ public class BaseTest {
     @BeforeSuite
     public void OpenBrowser() {
         log.info("open the browser before starting the tests");
-        log.info("Go to https://www.espn.com.co/");
         System.out.println();
     }
 
-    @AfterSuite
+    @BeforeSuite
     public void cleanCookies() {
         log.info("Click the lock icon on the left side of the search bar");
         log.info("Click cookies");
         log.info("Confirm that esp.com.co is selected");
         log.info("Click confirm");
         log.info("Click done");
+        System.out.println();
     }
 
-    @AfterSuite
+    @BeforeSuite
     public void clearCache() {
         log.info("Navigate to chrome://settings/clearBrowserData’");
         log.info("Clear Data button to clear the cache");
+        System.out.println();
+    }
+    @BeforeSuite
+    public void goToWebsite(){
+        log.info("Navigate to https://www.espnqa.com/?_adbock=true&src=com&espn=cloud");
+        System.out.println();
     }
 
     @AfterSuite

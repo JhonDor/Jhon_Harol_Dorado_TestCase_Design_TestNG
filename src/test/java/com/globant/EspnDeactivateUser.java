@@ -11,6 +11,7 @@ public class EspnDeactivateUser {
     @BeforeMethod
     public void verifyUser() {
         log.info("Verify the user exist");
+        System.out.println();
     }
 
     @Test
@@ -20,5 +21,6 @@ public class EspnDeactivateUser {
         log.info("Select the correct user to deactivate");
         log.info("Confirm the deactivation");
         log.info("Click done");
+        System.out.println();
     }
 }

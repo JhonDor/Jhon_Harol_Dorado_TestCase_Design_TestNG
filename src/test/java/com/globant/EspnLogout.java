@@ -11,6 +11,7 @@ public class EspnLogout {
     @BeforeMethod
     public void VerifyUserLogged() {
         log.info("Verify a user is logged in");
+        System.out.println();
     }
 
     @Test
@@ -18,5 +19,6 @@ public class EspnLogout {
         log.info("Click on the person icon");
         log.info("Click exit");
         log.info("Ensure that the logout has been successful");
+        System.out.println();
     }
 }

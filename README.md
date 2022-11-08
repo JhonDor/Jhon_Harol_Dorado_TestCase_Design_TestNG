@@ -10,7 +10,7 @@ Un proyecto en Java utilizando maven.
 
 ● Cree los tests para la página de ESPN
 
-(https://www.espn.com.co) de:
+(https://www.espnqa.com/?_adbock=true&src=com&espn=cloud) de:
 
 ■ iniciar sesión
 
