@@ -1,0 +1,24 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Test suite ESPN">
+    
+    <listeners>
+        <listener class-name="org.espn.utils.Listener"/>
+    </listeners>
+    
+    <parameter name="url" value="https://www.espnqa.com/?src=com&amp;_adblock=true&amp;espn=cloud"></parameter>
+    <parameter name="browser" value="chrome"></parameter>
+
+
+
+    <parameter name="email" value="lucoascarlet@gmail.com"></parameter>
+    <parameter name="password" value="123espn45678"></parameter>
+
+    <test name="Espn Login Test" enabled="true" >
+        <classes>
+            <class name="org.espn.tests.EspnLoginTest" />
+        </classes>
+    </test>
+
+
+
+</suite>
