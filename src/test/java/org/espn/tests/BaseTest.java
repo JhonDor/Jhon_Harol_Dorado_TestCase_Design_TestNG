@@ -1,6 +1,9 @@
 package org.espn.tests;
 
 import static java.lang.String.format;
+
+import org.espn.pages.HomePage;
+import org.espn.utils.DataProvider;
 import org.hamcrest.Matcher;
 import org.espn.pages.BasePage;
 import org.hamcrest.MatcherAssert;
@@ -10,11 +13,11 @@ import org.testng.annotations.Parameters;
 import org.espn.configuration.Driver;
 import org.espn.reporting.Reporter;
 
-public class BaseTest {
+public class BaseTest extends DataProvider {
 
-    public Driver driver;
-    protected BasePage mainPage;
-    protected final String userName = "lucoa";
+    public static Driver driver;
+    protected HomePage homePage;
+    protected final String userName = "Test";
     protected final String WelcomeMessage = "Welcome" + userName + "!";
 
     @Parameters({"browser", "url"})
@@ -26,10 +29,14 @@ public class BaseTest {
         Reporter.info(format("Navigating to %s", url));
         driver.getDriver().get(url);
         driver.getDriver().manage().window().maximize();
-        mainPage = new BasePage(driver.getDriver());
+        homePage = new HomePage(driver.getDriver());
+        homePage.switchToBannerIframe();
+        homePage.closeBanner();
+        homePage.exitBannerIframe();
+
     }
 
-    @AfterTest
+    //@AfterTest
     public void tearDown() {
         Reporter.info("Closing browser");
         driver.getDriver().quit();

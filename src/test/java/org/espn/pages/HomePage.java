@@ -1,24 +1,22 @@
 package org.espn.pages;
 
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.Iterator;
-import java.util.Set;
-
-public class HomePage extends BasePage{
+public class HomePage extends BasePage {
 
     @FindBy(id = "global-header")
     private WebElement globalHeader;
 
     @FindBy(id = "global-user-trigger")
-    private WebElement globalUserMenu;
+    private WebElement userIcon;
 
     @FindBy(css = "body.index.desktop.page-context-top.qa:nth-child(2) div.hidden-print:nth-child(3) header.espn-en.user-account-management.has-search nav:nth-child(3) ul.espn-en li.pillar.watch:nth-child(11) > a:nth-child(1)")
     private WebElement watchButton;
 
-    @FindBy(css="input[type='email']")
+    @FindBy(css = "input[type='email']")
     private WebElement EmailInput;
 
     @FindBy(id = "InputPassword")
@@ -34,32 +32,48 @@ public class HomePage extends BasePage{
     private WebElement SingUpButton;
 
     String loginIframe = "oneid-iframe";
-    @FindBy(css="div.global-user:last-child ul.account-management > li:last-child > a")
+    @FindBy(css = "div.global-user:last-child ul.account-management > li:last-child > a")
     private WebElement loginUserMenuOption;
 
     @FindBy(css = "div.global-user:last-child ul.account-management > li:last-child > a")
     private WebElement LogOutButton;
 
-    @FindBy (css = "#global-viewport > div.global-user > div > ul.account-management > li.display-user")
-    private WebElement NavUserMenuWelcomeText;
+    @FindBy(css = "div.global-user:last-child ul.account-management li.display-user")
+    private WebElement welcomeText;
 
-    @FindBy(css="li:nth-child(2) a[tref='/members/v3_1/modifyAccount']")
+    @FindBy(css = "li:nth-child(2) a[tref='/members/v3_1/modifyAccount']")
     private WebElement espnProfile;
 
     String SettingsIframe = "oneid-iframe";
 
-    @FindBy(id="AccountDeleteLink")
-    private WebElement DeactivateAccountButton;
+    @FindBy(id = "AccountDeleteLink")
+    private WebElement DeactivateAccountLink;
 
-    @FindBy(id="BtnSubmit")
+    @FindBy(css = "#TextBlock + #BtnSubmit")
     private WebElement DeactivateAccountConfirmationButton;
 
     @FindBy(xpath = "root > div:nth-child(3) > div > div > div:nth-child(1)")
     private WebElement DeactivateModalMessageWindow;
 
-    @FindBy(id = "BtnSubmit")
-    private WebElement DeactivateModalMessageWindowButtonConfirmation;
+    @FindBy(css = "section.PromoBanner")
+    private WebElement promoBanner;
 
+    @FindBy(css = ".promo-banner-container iframe")
+    private WebElement promoBannerIframe;
+    @FindBy(css = "div.PromoBanner__CloseBtn")
+    private WebElement promoBannerCloseButton;
+    @FindBy(id = "#sideLogin-left-rail")
+    private WebElement smallLoginFrame;
+    @FindBy(css = "div.view-starry-night > div:first-child")
+    private WebElement loginModalIframe;
+
+    @FindBy (css = "li.user > div.global-user:last-child")
+    private WebElement userOptionsForLogin;
+
+    @FindBy(css = "#TextError + #BtnSubmit")
+    private WebElement clickDeactivateConfirmation;
+    @FindBy (css = ".account-deleted-gating + #Title")
+    private  WebElement deleteAccountTitle;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -67,7 +81,7 @@ public class HomePage extends BasePage{
     }
 
     public void clickGlobalUserMenu() {
-        clickElement(globalUserMenu);
+        clickElement(userIcon);
     }
 
     public void clickWatchButton() {
@@ -79,23 +93,48 @@ public class HomePage extends BasePage{
         return new WatchPage(getDriver());
     }
 
-    public void hoverGlobalUserMenu() {
-        waitForVisibility(globalUserMenu);
-        hoverElement(globalUserMenu);
+    public boolean isBannerVisible() {
+        boolean bannerIsVisible = true;
+        try {
+            super.waitForVisibility(this.promoBanner);
+        } catch (TimeoutException e) {
+            bannerIsVisible = false;
+        }
+        return bannerIsVisible;
     }
-    public void changeToIframe(){
+    public void closeBanner() {
+        if (this.isBannerVisible()) {
+            super.clickElement(this.promoBannerCloseButton);
+        }
+    }
+    public void switchToBannerIframe() {
+        super.getDriver().switchTo().frame(this.promoBannerIframe);
+    }
+
+    public void exitBannerIframe() {
+        super.getDriver().switchTo().defaultContent();
+    }
+
+
+
+    public void mouseHoverUserIcon() {
+        super.mouseHover(this.userIcon);
+        super.waitForVisibility(this.userOptionsForLogin);
+    }
+
+    public void changeToLoginIframe() {
         getDriver().switchTo().frame(loginIframe);
     }
 
-    public boolean checkEspnLogoIsPresent(){
+    public boolean checkEspnLogoIsPresent() {
         return EspnLogo.isDisplayed();
     }
 
-    public boolean checkSingUpButtonIsPresent(){
+    public boolean checkSingUpButtonIsPresent() {
         return SingUpButton.isDisplayed();
     }
 
-    public boolean checkLoginButtonIsPresent(){
+    public boolean checkLoginButtonIsPresent() {
         return LoginButton.isDisplayed();
     }
 
@@ -122,63 +161,52 @@ public class HomePage extends BasePage{
     public void clickLoginOption() {
         clickElement(loginUserMenuOption);
     }
+    public void exitIframe() {
+        super.getDriver().switchTo().defaultContent();
+    }
 
-    public boolean checkNavUserMenuWelcomeText(String text) {
-        return NavUserMenuWelcomeText.getText().contains(text);
+
+
+    public void waitForMouseOverUserIcon() {
+        if (waitForReload(this.userIcon)) {
+            waitForVisibility(this.userIcon);
+        }
+    }
+
+    public String verifyWelcomeText() {
+        super.waitForVisibility(this.welcomeText);
+        return this.welcomeText.getText();
     }
 
     public void clickLogOutButton() {
         clickElement(LogOutButton);
     }
 
-    public boolean checkLogInButtonIsPresent(){
-        return loginUserMenuOption.isEnabled();
+
+    public void refreshPage() {
+        getDriver().navigate().refresh();
     }
+
 
     public void clickEspnProfile() {
         clickElement(espnProfile);
     }
 
-    public void changeToSettingsIframe(){
-        getDriver().switchTo().frame(SettingsIframe);
+    public void clickDeactivateAccountLink() {
+        clickElement(DeactivateAccountLink);
     }
 
     public void clickDeactivateAccountButton() {
-        clickElement(DeactivateAccountButton);
-    }
-
-    public void clickDeactivateAccountConfirmationButton() {
         clickElement(DeactivateAccountConfirmationButton);
     }
-    String PrincipalWindow = getDriver().getWindowHandle();
-    public void switchToConfirmationDeactivatePopUp(){
-        waitForVisibility(DeactivateModalMessageWindow);
-
-        Set<String> windowHandles = getDriver().getWindowHandles();
-        Iterator<String> i1 = windowHandles.iterator();
-
-        while (i1.hasNext()) {
-            String ChildWindow = i1.next();
-            if (!PrincipalWindow.equalsIgnoreCase(ChildWindow)) {
-                getDriver().switchTo().window(ChildWindow);
-
-                getDriver().close();
-            }
-        }
-        getDriver().switchTo().window(PrincipalWindow);
+    public void clickDeactivateConfirmation(){
+        super.clickElement(this.clickDeactivateConfirmation);
     }
 
-    public boolean checkDeactivateModalMessageWindowIsPresent(){
-        return DeactivateModalMessageWindow.isDisplayed();
+    public String getDeleteAccountTitleText() {
+        super.waitForVisibility(deleteAccountTitle);
+        return this.deleteAccountTitle.getText();
     }
-
-    public void clickDeactivateModalMessageWindowButtonConfirmation() {
-        clickElement(DeactivateModalMessageWindowButtonConfirmation);
-    }
-
-
-
-
 
 
 }

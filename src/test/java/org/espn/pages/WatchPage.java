@@ -1,15 +1,18 @@
 package org.espn.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfAllElements;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfAllElements;
 
 public class WatchPage extends HomePage {
-
+String url = "https://www.espnqa.com/?src=com&_adblock=true&espn=cloud";
     @FindBy(css = "section.Carousel")
     private List<WebElement> carousel;
 
@@ -21,6 +24,9 @@ public class WatchPage extends HomePage {
 
     @FindBy(css = "#fittPortal_0  > div > div > section > header > button")
     private WebElement CloseButtonCarouselPopUp;
+    @FindBy(css =".WatchListingsVideo__BackBtn")
+    private WebElement closeVideoPopUp;
+
 
     public Boolean checkCarouselIsPresent() {
         return carousel.size() > 0;
@@ -30,58 +36,44 @@ public class WatchPage extends HomePage {
         clickElement(secondCarouselCard);
     }
 
-    public boolean checkCarouselCloseBottomPopUpIsPresent() {
+    public boolean checkCloseButtonCarouselPopUp() {
         waitForVisibility(CloseButtonCarouselPopUp);
         return CloseButtonCarouselPopUp.isDisplayed();
     }
 
     public void clickCloseButtonCarouselPopUp() {
-        clickElement(CloseButtonCarouselPopUp);
+        clickElement(CarouselPopUp);
     }
     public WatchPage(WebDriver driver) {
         super(driver);
     }
-    public void goToHomePage() {
-        super.goToPreviousPage();
+    public List<WebElement> getCarouselCards() {
+        return carousel.get(1).findElements(By.cssSelector("ul.Carousel__Inner li"));
+    }
+    public boolean verifyCardsTitle() {
+        List<Boolean> title = new ArrayList<>();
+        waitForPresenceOfElements("ul.Carousel__Inner li");
+        getCarouselCards().stream().forEach(element -> {
+            title.add(element.findElement(By.cssSelector("h2.WatchTile__Title")).isDisplayed() && !element.findElement(By.cssSelector("h2.WatchTile__Title")).getText().equals(""));
+        });
+        return !title.contains(false);
     }
 
-    public void returnToMainPage() throws InterruptedException {
-
-        getDriver().navigate().back();
-
-    }
-    public HomePage returnToMainPage2() {
-        getDriver().navigate().back();
-        return new HomePage(getDriver());
-    }
-
-    public void returnToMainPage3() {
-        super.goToPreviousPage();
+    public boolean verifyCardsDescription() {
+        List<Boolean> description = new ArrayList<>();
+        waitForPresenceOfElements("ul.Carousel__Inner li");
+        getCarouselCards().stream().forEach(element -> {
+            description.add(element.findElement(By.cssSelector(".WatchTile__Meta")).isDisplayed() && !element.findElement(By.cssSelector(".WatchTile__Meta")).getText().equals(""));
+        });
+        return !description.contains(false);
     }
 
-    public HomePage returnToHomePage() {
+
+    public HomePage returnToHomePage(){
         super.getDriver().navigate().back();
         return new HomePage(getDriver());
     }
 
 
-
-    public void switchToCarouselPopUp(){
-        String MainWindow = getDriver().getWindowHandle();
-        waitForVisibility(CarouselPopUp);
-
-        Set<String> windowHandles = getDriver().getWindowHandles();
-        Iterator<String> i = windowHandles.iterator();
-
-        while (i.hasNext()) {
-            String ChildWindow = i.next();
-            if (!MainWindow.equalsIgnoreCase(ChildWindow)) {
-                getDriver().switchTo().window(ChildWindow);
-
-                getDriver().close();
-            }
-        }
-        getDriver().switchTo().window(MainWindow);
-    }
 }
 

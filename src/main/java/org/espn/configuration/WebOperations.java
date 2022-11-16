@@ -5,6 +5,8 @@ import static org.openqa.selenium.support.PageFactory.initElements;
 import java.time.Duration;
 import java.util.List;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -17,7 +19,7 @@ public class WebOperations {
 
     public WebOperations(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20L));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         initElements(driver, this);
     }
 
@@ -31,11 +33,9 @@ public class WebOperations {
         element.click();
     }
 
-    public void hoverElement(WebElement element) {
-        waitForVisibility(element);
-        waitForClickable(element);
-        Actions action = new Actions(driver);
-        action.moveToElement(element).build().perform();
+    public void mouseHover(WebElement element) {
+        this.waitForVisibility(element);
+        new Actions(getDriver()).moveToElement(element).perform();
     }
 
     public void typeOnInput(WebElement element, String text) {
@@ -55,8 +55,29 @@ public class WebOperations {
     }
 
 
-    public void goToPreviousPage() {
-        driver.navigate().back();
+    public boolean waitForReload(WebElement element) {
+        boolean wasReloaded = true;
+        try {
+            this.wait.until(ExpectedConditions.stalenessOf(element));
+        } catch (TimeoutException e) {
+            wasReloaded = false;
+        }
+        return wasReloaded;
+    }
+
+    public void waitForPresenceOfElement(String locator) {
+        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(locator)));
+    }
+
+    public void waitForInvisibility(WebElement element) {
+        this.wait.until(ExpectedConditions.invisibilityOf(element));
+    }
+    public void waitForAttributeChange(WebElement element, String attribute, String value) {
+        this.wait.until(ExpectedConditions.attributeToBe(element, attribute, value));
+    }
+
+    public void waitForPresenceOfElements(String locator) {
+        this.wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(locator)));
     }
 
 }

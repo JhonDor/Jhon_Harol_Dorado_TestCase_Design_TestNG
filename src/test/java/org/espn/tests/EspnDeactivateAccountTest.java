@@ -1,39 +1,42 @@
 package org.espn.tests;
 
 import org.espn.pages.HomePage;
+import org.hamcrest.CoreMatchers;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
 import static org.hamcrest.Matchers.is;
 
 public class EspnDeactivateAccountTest extends BaseTest {
 
-    @Test
-    @Parameters({"email", "password"})
+    @Test(dataProvider = "loginCredentials")
     public void EspnDeactivateAccountTest(String email, String password) {
         HomePage homePage = new HomePage(driver.getDriver());
         homePage.clickGlobalUserMenu();
-        //UserPage userPage = new UserPage(driver.getDriver());
         homePage.clickLoginOption();
-        //LoginPage loginPage = new LoginPage(driver.getDriver());
-        homePage.changeToIframe();
+        homePage.changeToLoginIframe();
         homePage.clickEmailInput();
         homePage.typeEmailInput(email);
         homePage.clickPasswordInput();
         homePage.typePasswordInput(password);
         homePage.clickLoginButton();
-       // HomePage mainPage2 = new HomePage(driver.getDriver());
-        homePage.hoverGlobalUserMenu();
-        //UserPage userPage2 = new UserPage(driver.getDriver());
+        homePage.exitIframe();
+        homePage.waitForMouseOverUserIcon();
+        homePage.mouseHoverUserIcon();
         homePage.clickEspnProfile();
-        homePage.changeToSettingsIframe();
+        homePage.changeToLoginIframe();
+        homePage.clickDeactivateAccountLink();
         homePage.clickDeactivateAccountButton();
-        homePage.clickDeactivateAccountConfirmationButton();
-
-
-        /** TO WORK ON **/
-        /** userPage2.switchToConfirmationDeactivatePopUp();
-        checkThat("Deactivate modal message window is present", userPage2.checkDeactivateModalMessageWindowIsPresent(), is(true));
-        userPage2.clickDeactivateModalMessageWindowButtonConfirmation(); **/
+        homePage.clickDeactivateConfirmation();
+        homePage.clickGlobalUserMenu();
+        homePage.clickLoginOption();
+        homePage.changeToLoginIframe();
+        homePage.clickEmailInput();
+        homePage.typeEmailInput(email);
+        homePage.clickPasswordInput();
+        homePage.typePasswordInput(password);
+        homePage.clickLoginButton();
+        checkThat("Verify that deactivated text is correct", homePage.getDeleteAccountTitleText(), CoreMatchers.is("Account Deactivated"));
 
     }
 }
