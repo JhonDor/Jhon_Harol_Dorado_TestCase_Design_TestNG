@@ -36,7 +36,7 @@ public class BaseTest extends DataProvider {
 
     }
 
-    //@AfterTest
+    @AfterTest
     public void tearDown() {
         Reporter.info("Closing browser");
         driver.getDriver().quit();
