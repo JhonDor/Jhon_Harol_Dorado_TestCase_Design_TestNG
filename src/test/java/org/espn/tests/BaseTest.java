@@ -30,9 +30,7 @@ public class BaseTest extends DataProvider {
         driver.getDriver().get(url);
         driver.getDriver().manage().window().maximize();
         homePage = new HomePage(driver.getDriver());
-        homePage.switchToBannerIframe();
-        homePage.closeBanner();
-        homePage.exitBannerIframe();
+        homePage.dismissBanner();
 
     }
 
