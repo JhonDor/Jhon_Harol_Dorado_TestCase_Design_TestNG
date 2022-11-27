@@ -93,16 +93,7 @@ public class HomePage extends BasePage {
         return new WatchPage(getDriver());
     }
 
-    
-
-
-
-    public void mouseHoverUserIcon() {
-        super.mouseHover(this.userIcon);
-        super.waitForVisibility(this.userOptionsForLogin);
-    }
-
-    public void chapublic boolean isBannerVisible() {
+    public boolean isBannerVisible() {
         boolean bannerIsVisible = true;
         try {
             super.waitForVisibility(this.promoBanner);
@@ -134,9 +125,22 @@ public class HomePage extends BasePage {
             this.exitBannerIframe();
         }
 
-    }ngeToLoginIframe() {
+    }
+
+
+
+    public void mouseHoverUserIcon() {
+        super.mouseHover(this.userIcon);
+        super.waitForVisibility(this.userOptionsForLogin);
+    }
+
+    public void changeToLoginIframe() {
         getDriver().switchTo().frame(loginIframe);
     }
+
+
+
+
 
     public boolean checkEspnLogoIsPresent() {
         return EspnLogo.isDisplayed();
