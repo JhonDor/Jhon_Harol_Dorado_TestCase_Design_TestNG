@@ -93,7 +93,16 @@ public class HomePage extends BasePage {
         return new WatchPage(getDriver());
     }
 
-    public boolean isBannerVisible() {
+    
+
+
+
+    public void mouseHoverUserIcon() {
+        super.mouseHover(this.userIcon);
+        super.waitForVisibility(this.userOptionsForLogin);
+    }
+
+    public void chapublic boolean isBannerVisible() {
         boolean bannerIsVisible = true;
         try {
             super.waitForVisibility(this.promoBanner);
@@ -108,21 +117,24 @@ public class HomePage extends BasePage {
         }
     }
     public void switchToBannerIframe() {
-        super.getDriver().switchTo().frame(this.promoBannerIframe);
+        if(isBannerVisible()){
+            super.getDriver().switchTo().frame(this.promoBannerIframe);
+        }
+
     }
 
     public void exitBannerIframe() {
         super.getDriver().switchTo().defaultContent();
     }
 
+    public void dismissBanner(){
+        if(isBannerVisible()){
+            this.switchToBannerIframe();
+            this.closeBanner();
+            this.exitBannerIframe();
+        }
 
-
-    public void mouseHoverUserIcon() {
-        super.mouseHover(this.userIcon);
-        super.waitForVisibility(this.userOptionsForLogin);
-    }
-
-    public void changeToLoginIframe() {
+    }ngeToLoginIframe() {
         getDriver().switchTo().frame(loginIframe);
     }
 
